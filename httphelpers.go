@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -15,6 +14,8 @@ import (
 	"path"
 	"regexp"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 var validURL = regexp.MustCompile(`^/v[2-4].*`)
@@ -66,6 +67,10 @@ type formDataPayload struct {
 
 type urlEncodedPayload struct {
 	Values []keyValuePair
+}
+
+type jsonEncodedPayload struct {
+	json []byte
 }
 
 func newHTTPRequest(url string) *httpRequest {
@@ -194,6 +199,35 @@ func (f *formDataPayload) getContentType() string {
 		f.getPayloadBuffer()
 	}
 	return f.contentType
+}
+
+func newJSONEncodedPayload() *jsonEncodedPayload {
+	return &jsonEncodedPayload{}
+}
+
+func (f *jsonEncodedPayload) getContentType() string {
+	return "application/json"
+}
+
+func (f *jsonEncodedPayload) getPayloadBuffer() (*bytes.Buffer, error) {
+	return bytes.NewBuffer(f.json), nil
+}
+
+func (f *jsonEncodedPayload) getValues() []keyValuePair {
+	pairs := []keyValuePair{}
+	pairs = append(pairs, keyValuePair{key: "json", value: string(f.json)})
+	return pairs
+}
+
+func (f *jsonEncodedPayload) addJSON(obj interface{}) error {
+	parseJSON, err := json.Marshal(obj)
+	if err != nil {
+		return err
+	}
+
+	f.json = parseJSON
+
+	return nil
 }
 
 func (r *httpRequest) addHeader(name, value string) {

@@ -22,6 +22,27 @@ func TestCreateUnsubscriber(t *testing.T) {
 	ensure.Nil(t, mg.CreateUnsubscribe(ctx, email, "*"))
 }
 
+func TestCreateUnsubscribes(t *testing.T) {
+	if reason := SkipNetworkTest(); reason != "" {
+		t.Skip(reason)
+	}
+
+	email := randomEmail("unsubcribe", os.Getenv("MG_DOMAIN"))
+	mg, err := NewMailgunFromEnv()
+	ensure.Nil(t, err)
+	ctx := context.Background()
+
+	unsubscribes := []NewUnsubscribe{}
+	unsubscribes = append(unsubscribes,
+		NewUnsubscribe{
+			Address: email,
+			Tags:    []string{"*"},
+		})
+
+	// Create unsubscription record
+	ensure.Nil(t, mg.CreateUnsubscribes(ctx, unsubscribes))
+}
+
 func TestListUnsubscribes(t *testing.T) {
 	if reason := SkipNetworkTest(); reason != "" {
 		t.Skip(reason)

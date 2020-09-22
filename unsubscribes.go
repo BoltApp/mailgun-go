@@ -17,6 +17,12 @@ type unsubscribesResponse struct {
 	Items  []Unsubscribe `json:"items"`
 }
 
+type NewUnsubscribe struct {
+	CreatedAt RFC2822Time `json:"created_at,omitempty"`
+	Tags      []string    `json:"tags,omitempty"`
+	Address   string      `json:"address"`
+}
+
 // Fetches the list of unsubscribes
 func (mg *MailgunImpl) ListUnsubscribes(opts *ListOptions) *UnsubscribesIterator {
 	r := newHTTPRequest(generateApiUrl(mg, unsubscribesEndpoint))
@@ -153,6 +159,20 @@ func (mg *MailgunImpl) CreateUnsubscribe(ctx context.Context, address, tag strin
 	p.addValue("address", address)
 	p.addValue("tag", tag)
 	_, err := makePostRequest(ctx, r, p)
+	return err
+}
+
+// CreateUnsubscribes adds a list of e-mail addresses to the domain's unsubscription table.
+func (mg *MailgunImpl) CreateUnsubscribes(ctx context.Context, unsubscribes []NewUnsubscribe) error {
+	r := newHTTPRequest(generateApiUrl(mg, unsubscribesEndpoint))
+	r.setClient(mg.Client())
+	r.setBasicAuth(basicAuthUser, mg.APIKey())
+	p := newJSONEncodedPayload()
+	err := p.addJSON(unsubscribes)
+	if err != nil {
+		return err
+	}
+	_, err = makePostRequest(ctx, r, p)
 	return err
 }
 
