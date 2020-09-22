@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BoltApp/mailgun-go/v4"
 	"github.com/facebookgo/ensure"
-	"github.com/mailgun/mailgun-go/v4"
 	"github.com/pkg/errors"
 )
 

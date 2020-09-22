@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"github.com/go-chi/chi"
-	"github.com/mailgun/mailgun-go/v4/events"
 )
 
 func (ms *MockServer) addMessagesRoutes(r chi.Router) {

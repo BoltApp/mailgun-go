@@ -3,8 +3,8 @@ package examples
 import (
 	"context"
 	"fmt"
-	"github.com/mailgun/mailgun-go/v4"
-	"github.com/mailgun/mailgun-go/v4/events"
+	"github.com/BoltApp/mailgun-go/v4"
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"os"
 	"time"
 )

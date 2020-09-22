@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"github.com/facebookgo/ensure"
-	"github.com/mailgun/mailgun-go/v4/events"
 )
 
 func TestParseErrors(t *testing.T) {
