@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/mailgun/mailgun-go/v4/events"
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"github.com/mailru/easyjson"
 )
 

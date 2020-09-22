@@ -3,9 +3,9 @@ package mailgun_test
 import (
 	"context"
 	"fmt"
+	"github.com/BoltApp/mailgun-go/v4"
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"github.com/facebookgo/ensure"
-	"github.com/mailgun/mailgun-go/v4"
-	"github.com/mailgun/mailgun-go/v4/events"
 	"strings"
 	"testing"
 )

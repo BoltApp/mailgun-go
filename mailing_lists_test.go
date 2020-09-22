@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
+	"github.com/BoltApp/mailgun-go/v4"
 	"github.com/facebookgo/ensure"
-	"github.com/mailgun/mailgun-go/v4"
 )
 
 func TestMailingListMembers(t *testing.T) {

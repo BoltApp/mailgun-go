@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BoltApp/mailgun-go/v4"
+	"github.com/BoltApp/mailgun-go/v4/events"
 	"github.com/facebookgo/ensure"
-	"github.com/mailgun/mailgun-go/v4"
-	"github.com/mailgun/mailgun-go/v4/events"
 )
 
 func TestEventIteratorGetNext(t *testing.T) {

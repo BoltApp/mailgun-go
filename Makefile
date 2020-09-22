@@ -1,7 +1,7 @@
 .PHONY: all
 .DEFAULT_GOAL := all
 
-PACKAGE := github.com/mailgun/mailgun-go
+PACKAGE := github.com/BoltApp/mailgun-go
 
 gen:
 	rm events/events_easyjson.go
